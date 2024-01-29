@@ -16,16 +16,12 @@ class Post {
   });
 
   factory Post.fromJson(Map<String, dynamic> json) {
-    print('entrou ');
-    Map<String, dynamic> postData = json['posts'];
-    Map<String, dynamic> userData = json['user'];
-    print('O que tem no postData: $postData');
     return Post(
-      id: postData['id'],
-      userId: postData['user_id'],
-      description: postData['description'],
-      imageUrl: postData['image_url'],
-      user: User.fromJson(userData),
+      id: json['id'],
+      userId: json['user_id'],
+      description: json['description'],
+      imageUrl: json['image_url'],
+      user: User.fromJson(json['user']),
     );
   }
 }
