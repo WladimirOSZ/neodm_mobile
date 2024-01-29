@@ -20,7 +20,19 @@ final router = GoRouter(
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
-              return Text("Error daqui ${snapshot.error}");
+              return Column(
+                children: [
+                  Text('Error: ${snapshot.error}'),
+                  TextButton(
+                    onPressed: () {
+                      context.read<UserProvider>().logout().then(
+                            (v) => context.go('/'),
+                          );
+                    },
+                    child: Text('Logout'),
+                  ),
+                ],
+              );
             } else {
               final user = context.read<UserProvider>();
               if (user.isLoggedIn) {

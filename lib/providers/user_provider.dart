@@ -57,8 +57,10 @@ class UserProvider extends ChangeNotifier {
     );
 
     if (response.statusCode == 200) {
-      _user = User.fromJson(jsonDecode(response.body)['status']['data']['user'],
-          response.headers['authorization']!);
+      _user = User.fromLoginJson(
+        jsonDecode(response.body)['status']['data']['user'],
+        response.headers['authorization']!,
+      );
       saveUser();
       return _user!;
     }
